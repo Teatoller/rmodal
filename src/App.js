@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import DemoModal from "./components/modals/DemoModal";
+import ModalForm from "./components/modals/ModalForm";
+import SuperModal from "./components/modals/SuperModal";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    isOpen: true,
+  };
+
+  openModal = () => this.setState({ isOpen: true });
+  closeModal = () => this.setState({ isOpen: false });
+  handleSubmit=(name) => {}
+
+  render() {
+    return (
+      <>
+      <div className="App">
+      <SuperModal/>
+      <DemoModal/>
+        <button onClick={this.openModal}>Display Modal Form</button>
+
+        {this.state.isOpen ? (
+          <ModalForm
+            closeModal={this.closeModal}
+            isOpen={this.state.isOpen}
+            handleSubmit={this.handleSubmit}
+          />
+        ) : null}
+        
+      </div>
+      </>
+    );
+  }
 }
 
 export default App;
